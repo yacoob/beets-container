@@ -7,6 +7,8 @@ on:
   # For pull requests, build but don't push.
   pull_request:
   # Build and push if triggered manually.
+  repository_dispatch:
+    types: dependency-updated
 
 env:
   REPO_IS_DETACHED: ${{ github.event_name == 'pull_request' }}
