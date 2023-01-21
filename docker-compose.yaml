@@ -1,0 +1,13 @@
+version: '3'
+name: beets-cli
+
+services:
+  beets:
+    image: yacoob/beets
+    container_name: beets-cli
+    hostname: beets
+    volumes:
+      - /home/yacoob/.config/beets:/home/yacoob/.config/beets
+      - /srv/music:/music
+      - $PWD:/input
+    restart: "no"
