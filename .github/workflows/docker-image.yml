@@ -14,7 +14,7 @@ on:
 
 env:
   REPO_IS_DETACHED: ${{ github.event_name == 'pull_request' }}
-  PUSH_TO_MASTER: ${{ github.event_name == 'push' && endsWith(github.ref, '/master') }}
+  PUSH_TO_MAIN: ${{ github.event_name == 'push' && endsWith(github.ref, '/main') }}
 
 jobs:
   build:
@@ -54,4 +54,4 @@ jobs:
           labels: ${{ steps.docker_meta.outputs.labels }}
           tags: |
             ${{ steps.docker_meta.outputs.tags }}
-            ${{ env.PUSH_TO_MASTER == 'true' && 'yacoob/beets:latest' || ''}}
+            ${{ env.PUSH_TO_MAIN == 'true' && 'yacoob/beets:latest' || ''}}
