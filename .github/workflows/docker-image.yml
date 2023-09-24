@@ -7,6 +7,8 @@ on:
   # For pull requests, build but don't push.
   pull_request:
   # Build and push if triggered manually.
+  workflow_dispatch:
+  # Ping from the other repository.
   repository_dispatch:
     types: dependency-updated
 
