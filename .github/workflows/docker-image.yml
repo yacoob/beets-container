@@ -14,7 +14,6 @@ on:
 
 env:
   REPO_IS_DETACHED: ${{ github.event_name == 'pull_request' }}
-  PUSH_TO_MAIN: ${{ github.event_name == 'push' && endsWith(github.ref, '/main') }}
 
 jobs:
   build:
@@ -22,12 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Work out docker tags
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         id: docker_meta
         with:
           images: yacoob/beets
           tags: |
             type=sha
+            type=raw,value=latest,enable={{is_default_branch}}
       - name: Set branch name as env variable
         run: |
           export _BRANCH=${{ github.head_ref || github.ref }}
@@ -35,16 +35,16 @@ jobs:
       - name: Debug dump
         uses: crazy-max/ghaction-dump-context@v1
       - name: Set up docker builder (buildx)
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v3
       - name: Log in to docker hub
         # Skip registry push for pull_requests.
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
       - name: Build and optionally push the docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           build-args: |
             CONF_BRANCH=${{ env.CONF_BRANCH }}
@@ -52,6 +52,4 @@ jobs:
           # Skip registry push for pull_requests.
           push: ${{ github.event_name != 'pull_request' }}
           labels: ${{ steps.docker_meta.outputs.labels }}
-          tags: |
-            ${{ steps.docker_meta.outputs.tags }}
-            ${{ env.PUSH_TO_MAIN == 'true' && 'yacoob/beets:latest' || ''}}
+          tags: ${{ steps.docker_meta.outputs.tags }}
