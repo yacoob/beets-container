@@ -7,7 +7,9 @@ services:
     container_name: beets-cli
     hostname: beets
     volumes:
-      - /home/yacoob/.config/beets:/home/yacoob/.config/beets
+      - /srv/sw/beets:/home/yacoob/.config/beets
       - /srv/music:/music
       - $PWD:/input
-    restart: "no"
+    restart: no
+    stdin_open: true
+    tty: true
