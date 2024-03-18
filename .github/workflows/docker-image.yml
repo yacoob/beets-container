@@ -46,6 +46,7 @@ jobs:
       - name: Build and optionally push the docker image
         uses: docker/build-push-action@v5
         with:
+          target: beets
           build-args: |
             CONF_BRANCH=${{ env.CONF_BRANCH }}
             REPO_IS_DETACHED=${{ env.REPO_IS_DETACHED }}
