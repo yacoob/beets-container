@@ -1,6 +1,19 @@
 library: /music/beetsdb
 directory: /music
-plugins: mbsync fetchart duplicates missing scrub embedart lastgenre discogs web info inline replaygain
+plugins:
+  - bpmanalyser
+  - describe
+  - discogs
+  - duplicates
+  - embedart
+  - fetchart
+  - info
+  - inline
+  - lastgenre
+  - mbsync
+  - missing
+  - replaygain
+  - scrub
 
 original_date: yes
 per_disc_numbering: yes
@@ -26,17 +39,19 @@ match:
     media: [CD, Digital Media|File]
     original_year: yes
 
-lastgenre:
-  prefer_specific: yes
-  canonical: yes
+# plugin config
+#
+bpmanalyser:
+  auto: yes
 
 fetchart:
   cautious: yes
   cover_names: front covert art
 
+lastgenre:
+  prefer_specific: yes
+  canonical: yes
+
 replaygain:
   backend: ffmpeg
   auto: yes
-
-chroma:
-  auto: no
