@@ -6,6 +6,9 @@ services:
     image: yacoob/beets
     container_name: beets-cli
     hostname: beets
+    environment:
+      - UID=1026
+      - GID=65537
     volumes:
       - /volume1/sw/beets:/home/yacoob/.config/beets
       - /volume1/music:/music
