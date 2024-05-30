@@ -8,8 +8,8 @@ services:
       - UID=1000
       - GID=1000
     volumes:
-      - /volume1/sw/beets:/home/yacoob/.config/beets
-      - /volume1/music:/music
+      - /srv/sw/beets:/home/yacoob/.config/beets
+      - /srv/music:/music
       - $PWD:/input
     restart: no
     stdin_open: true
