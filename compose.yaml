@@ -1,6 +1,4 @@
-version: '3'
 name: beets-cli
-
 services:
   beets:
     image: yacoob/beets
