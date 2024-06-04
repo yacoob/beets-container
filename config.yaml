@@ -12,6 +12,7 @@ plugins:
   - lastgenre
   - mbsync
   - missing
+  - permissions
   - replaygain
   - scrub
 
@@ -24,6 +25,10 @@ import:
   resume: yes
   from_scratch: yes
   languages: en
+
+permissions:
+  file: 664
+  dir: 755
 
 paths:
     default: $albumartist/$album%aunique{}/%if{$multidisc,$disc-}$track $title
