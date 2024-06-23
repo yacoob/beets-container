@@ -1,4 +1,4 @@
-FROM yacoob/interactive:base as builder
+FROM yacoob/interactive:base AS builder
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
       python3 \
@@ -26,5 +26,5 @@ RUN python3 -mvenv --system-site-packages beets && \
     rm -rf /home/yacoob/.cache && \
     echo 'source ~/beets/bin/activate' > ~/.zshrc.local
 
-FROM yacoob/interactive:base as beets
+FROM yacoob/interactive:base AS beets
 COPY --from=builder / /
