@@ -24,7 +24,7 @@ RUN python3 -mvenv --system-site-packages beets && \
       beets-bpmanalyser \
       beets-describe && \
     rm -rf /home/yacoob/.cache && \
-    echo 'source ~/beets/bin/activate' > ~/.zshrc.local
+    echo 'source ~/beets/bin/activate' >> ~/.zshrc.local
 
 FROM yacoob/interactive:base AS beets
 COPY --from=builder / /
