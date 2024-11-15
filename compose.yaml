@@ -1,7 +1,7 @@
 name: beets-cli
 services:
   beets:
-    image: yacoob/beets
+    image: ghcr.io/yacoob/beets
     container_name: beets-cli
     hostname: beets
     environment:
