@@ -1,0 +1,14 @@
+name: Build when base image updates
+
+on:
+  registry_package:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  trigger-build:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.registry_package.name == 'interactive' &&
+       github.event.registry_package.package_version.container_metadata.tag.name == 'base')
+    uses: ./.github/workflows/docker-image.yml
