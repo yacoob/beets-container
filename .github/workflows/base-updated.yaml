@@ -6,7 +6,21 @@ on:
   workflow_dispatch:
 
 jobs:
+  info:
+    name: just record the fact that the trigger worked
+    runs-on: ubuntu-latest
+    steps:
+      - name: context dump
+        uses: crazy-max/ghaction-dump-context@v2
+
   trigger-build:
+    name: Build the image
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+    needs: info
     if: |
       github.event_name == 'workflow_dispatch' ||
       (github.event.registry_package.name == 'interactive' &&
