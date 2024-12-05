@@ -2,14 +2,13 @@
 
 FROM ghcr.io/yacoob/interactive:base AS builder
 USER root
-RUN dnf install --setopt=install_weak_deps=False -y \
+RUN dnf5 install --setopt=install_weak_deps=False -y \
       ffmpeg \
       python3 \
       aubio-python3 \
       python3-numpy \
       python3-pylast \
-  && dnf clean all
-WORKDIR /tmp
+  && dnf5 clean all
 # Install beets + plugin
 USER yacoob
 WORKDIR /home/yacoob
