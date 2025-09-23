@@ -19,3 +19,5 @@ RUN python3 -mvenv --system-site-packages beets && \
 
 FROM ghcr.io/yacoob/interactive:base AS beets
 COPY --from=builder / /
+LABEL prompt="podman run -it --rm --userns=keep-id:uid=1000,gid=1000 --security-opt label=disable -v /srv/sw/beets:/home/yacoob/.config/beets -v /srv/music:/music -v \$PWD:/input IMAGE"
+
